@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <Card 
         imageUrl={moonImage}
-        title="Hello React Card"
+        title="Hello Beaver Moon"
         onClick={() => console.log('Card clicked!')}
       />
     </div>
