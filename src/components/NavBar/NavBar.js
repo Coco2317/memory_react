@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { FaAtom, FaBars, FaTimes } from "react-icons/fa";
 import "./NavBar.css";
 
@@ -13,9 +14,9 @@ function NavBar() {
       </div>
 
       <div className={`nav-links ${menuOpen ? "open" : ""}`}>
-        <a href="/">Home</a>
-        <a href="#restart">Restart</a>
-        <a href="#about">About</a>
+        <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+        <Link to="/game" onClick={() => setMenuOpen(false)}>Play</Link>
+        <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
       </div>
 
       <div className="burger" onClick={() => setMenuOpen(!menuOpen)}>
