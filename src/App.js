@@ -1,16 +1,10 @@
 import './App.css';
-import Card from './components/card/card';
-
-import moonImage from './assets/image.jpg';
+import MemoryGame from './components/MemoryGame';
 
 function App() {
   return (
     <div className="App">
-      <Card 
-        imageUrl={moonImage}
-        title="Hello Beaver Moon"
-        onClick={() => console.log('Card clicked!')}
-      />
+      <MemoryGame />
     </div>
   );
 }
