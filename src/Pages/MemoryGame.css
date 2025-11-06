@@ -1,3 +1,4 @@
+/* === CONTAINER DU JEU === */
 .game-container {
   min-height: 100vh;
   background: url("../assets/background.jpg") center/cover no-repeat fixed;
@@ -5,24 +6,57 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 100px;
+  padding-top: 120px;
   color: #fff;
+  position: relative;
+  overflow: hidden;
 }
 
+/* === LAYER FLOUTÉ EN ARRIÈRE-PLAN === */
+.game-container::before {
+  content: "";
+  position: fixed; /* ✅ FIXÉ derrière tout */
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  z-index: 0; /* ✅ SOUS les cartes */
+}
+
+/* === TITRE DU JEU === */
+.game-title {
+  position: relative;
+  z-index: 3; /* ✅ au-dessus du flou */
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(1.6rem, 2vw + 0.5rem, 2.2rem);
+  text-align: center;
+  background: linear-gradient(90deg, #ff3b3b, #16a085, #a97142);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+  animation: fadeIn 1s ease;
+}
+
+/* === GRILLE DE CARTES === */
 .cards-grid {
+  position: relative;
+  z-index: 2; /* ✅ visible */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 1.5rem;
   padding: 2rem;
   width: 95%;
   max-width: 900px;
+  justify-items: center;
 }
 
+/* === CARTES === */
 .memory-card {
   perspective: 1000px;
   position: relative;
   cursor: pointer;
   transition: transform 0.3s ease;
+  z-index: 4; /* ✅ au-dessus de tout */
 }
 
 .memory-card:hover {
@@ -36,30 +70,87 @@
   transform-style: preserve-3d;
   transition: transform 0.8s ease;
   border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .memory-card.flipped .card-inner {
   transform: rotateY(180deg);
 }
 
+/* === FACE AVANT / ARRIÈRE === */
 .card-front,
 .card-back {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   border-radius: 15px;
   backface-visibility: hidden;
+  overflow: hidden;
 }
 
-.card-front img {
+.card-front img,
+.card-back img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
   border-radius: 15px;
 }
 
+/* === Dos des cartes === */
 .card-back {
   transform: rotateY(180deg);
   background: url("../assets/bazinga.jpg") center/cover no-repeat;
   border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* === MESSAGE DE VICTOIRE === */
+.victory-message {
+  position: relative;
+  z-index: 5; /* ✅ visible */
+  margin-top: 1rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.6s ease;
+}
+
+.victory-message h3 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.4rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.victory-message button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #e74c3c, #c0392b);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.victory-message button:hover {
+  background: linear-gradient(90deg, #ff6f61, #d63a2d);
+  transform: translateY(-2px);
+}
+
+/* === ANIMATIONS === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

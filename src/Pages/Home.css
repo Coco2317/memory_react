@@ -1,37 +1,49 @@
-.home-wrapper {
-  height: 100vh;
+.home-container {
+  min-height: 100vh;
   background-size: cover;
   background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
+/* Overlay sombre flouté */
 .home-overlay {
-  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(6px);
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1;
+  padding: 1rem;
 }
 
+/* Carte centrale */
 .home-card {
+  position: relative;
+  z-index: 2;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 18px;
-  padding: 3rem 2.5rem;
+  padding: 2.5rem 2rem;
   text-align: center;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
-  max-width: 420px;
-  width: 90%;
+  width: 550px; /* format carré fixe */
+  height: 490px; /* conserve l’équilibre vertical */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Titre principal */
 .home-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(1.8rem, 2vw + 1rem, 2.4rem);
-  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
   background: linear-gradient(90deg, #ff3b3b, #16a085, #a97142);
   background-size: 300% 300%;
   background-clip: text;
@@ -41,11 +53,13 @@
   text-shadow: 0 0 10px rgba(255, 85, 85, 0.4),
                0 0 20px rgba(255, 85, 85, 0.2);
   transition: text-shadow 0.3s ease, transform 0.3s ease;
+  text-align: center;
+  line-height: 1.2;
 }
 
 .home-title:hover {
-  text-shadow: 0 0 20px rgba(255, 85, 85, 0.8),
-               0 0 40px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 0 25px rgba(255, 85, 85, 0.8),
+               0 0 45px rgba(255, 255, 255, 0.3);
   transform: scale(1.03);
 }
 
@@ -55,49 +69,89 @@
   100% { background-position: 0% 50%; }
 }
 
-
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-
+/* Labels */
 label {
   display: block;
   color: #fff;
-  margin-top: 1.5rem;
-  font-weight: 500;
+  margin-top: 0.8rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+  font-size: 0.8rem;
 }
 
+/* Inputs et select */
 .home-input,
 .home-select {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   border-radius: 10px;
   border: none;
-  margin-top: 0.6rem;
-  font-size: 1rem;
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
   outline: none;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
+  color: #222;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
+.home-input:focus,
+.home-select:focus {
+  box-shadow: 0 0 10px #ff3b3b;
+  transform: scale(1.02);
+}
+
+/* Bouton principal */
 .home-button {
   width: 100%;
-  margin-top: 2rem;
-  padding: 14px;
+  margin-top: 1.2rem;
+  padding: 12px;
   background: linear-gradient(90deg, #e74c3c, #c0392b);
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  font-weight: 600;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  letter-spacing: 0.5px;
 }
 
 .home-button:hover {
   transform: translateY(-2px);
   background: linear-gradient(90deg, #ff6f61, #d63a2d);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive mobile (on garde le cube mais plus souple) */
+@media (max-width: 480px) {
+  .home-card {
+    width: 300px;
+    height: auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .home-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* Animation d’apparition de la carte */
+@keyframes fadeZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* On applique l’animation à la home-card */
+.home-card {
+  animation: fadeZoomIn 0.8s ease forwards;
 }

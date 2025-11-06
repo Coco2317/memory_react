@@ -15,7 +15,7 @@ function NavBar() {
 
       <div className={`nav-links ${menuOpen ? "open" : ""}`}>
         <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
-        <Link to="/game" onClick={() => setMenuOpen(false)}>Play</Link>
+        <Link to="/rules" onClick={() => setMenuOpen(false)}>Rules</Link>
         <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
       </div>
 

@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import Home from "./Pages/Home";
 import MemoryGame from "./Pages/MemoryGame";
+import Rules from "./Pages/Rules";
 import Footer from "./components/Footer/Footer";
 import "./styles/global.css";
 
 function App() {
-  const [isPlaying, setIsPlaying] = useState(false);
   const [playerName, setPlayerName] = useState("");
   const [level, setLevel] = useState("easy");
 
@@ -15,6 +15,7 @@ function App() {
     <Router>
       <div className="App">
         <NavBar />
+
         <Routes>
           <Route
             path="/"
@@ -24,7 +25,6 @@ function App() {
                 setPlayerName={setPlayerName}
                 level={level}
                 setLevel={setLevel}
-                onStart={() => setIsPlaying(true)}
               />
             }
           />
@@ -32,7 +32,9 @@ function App() {
             path="/game"
             element={<MemoryGame playerName={playerName} level={level} />}
           />
+          <Route path="/rules" element={<Rules />} />
         </Routes>
+
         <Footer />
       </div>
     </Router>

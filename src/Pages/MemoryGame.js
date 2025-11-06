@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./MemoryGame.css";
-import deckImage from "../assets/bazinga.jpg"; // ✅ ton visuel Bazinga rouge
-import backgroundImage from "../assets/background.jpg"; // ✅ ton fond de page
+import deckImage from "../assets/bazinga.jpg"; // image Bazinga (dos des cartes)
+import backgroundImage from "../assets/background.jpg"; // fond principal
 
+// 🖼️ Images du jeu
 import img1 from "../assets/images/img1.jpg";
 import img2 from "../assets/images/img2.jpg";
 import img3 from "../assets/images/img3.jpg";
@@ -18,7 +19,7 @@ function MemoryGame({ playerName, level }) {
   const [matchedCards, setMatchedCards] = useState([]);
   const [victory, setVictory] = useState(false);
 
-  // Mélange des cartes selon le niveau
+  // 🎴 Génère et mélange les cartes selon le niveau choisi
   useEffect(() => {
     let pairCount = 6;
     if (level === "medium") pairCount = 8;
@@ -32,10 +33,11 @@ function MemoryGame({ playerName, level }) {
         image,
         flipped: false,
       }));
+
     setCards(shuffledCards);
   }, [level]);
 
-  // Gestion du clic sur une carte
+  // 🖱️ Gère le clic sur une carte
   const handleCardClick = (id) => {
     const clickedCard = cards.find((c) => c.id === id);
     if (!clickedCard || clickedCard.flipped || flippedCards.length === 2) return;
@@ -47,7 +49,7 @@ function MemoryGame({ playerName, level }) {
     setFlippedCards([...flippedCards, clickedCard]);
   };
 
-  // Vérifie les paires
+  // 🧩 Vérifie les paires
   useEffect(() => {
     if (flippedCards.length === 2) {
       const [first, second] = flippedCards;
@@ -68,14 +70,14 @@ function MemoryGame({ playerName, level }) {
     }
   }, [flippedCards]);
 
-  // Vérifie la victoire
+  // 🏁 Vérifie la victoire
   useEffect(() => {
     if (matchedCards.length === cards.length / 2 && cards.length > 0) {
       setVictory(true);
     }
   }, [matchedCards, cards]);
 
-  // Relancer une partie
+  // 🔁 Relancer une partie
   const restartGame = () => {
     setVictory(false);
     setMatchedCards([]);
@@ -97,6 +99,7 @@ function MemoryGame({ playerName, level }) {
           : `${playerName || "Player"}, match the cards!`}
       </h2>
 
+      {/* 🧩 Grille de cartes */}
       <div className="cards-grid">
         {cards.map((card) => (
           <div
@@ -106,16 +109,17 @@ function MemoryGame({ playerName, level }) {
           >
             <div className="card-inner">
               <div className="card-front">
-                <img src={card.image} alt="card front" />
+                <img src={card.image} alt="front" />
               </div>
               <div className="card-back">
-                <img src={deckImage} alt="card back" />
+                <img src={deckImage} alt="back" />
               </div>
             </div>
           </div>
         ))}
       </div>
 
+      {/* 🏁 Victoire */}
       {victory && (
         <div className="victory-message">
           <h3>Bazinga! You won 🧠</h3>

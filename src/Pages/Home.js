@@ -1,25 +1,36 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import background from "../assets/background.jpg";
 
-function Home({ playerName, setPlayerName, level, setLevel, onStart }) {
+function Home({ playerName, setPlayerName, level, setLevel }) {
+  const navigate = useNavigate();
+
+  const handleStart = () => {
+    if (!playerName.trim()) {
+      alert("Please enter your name, player!");
+      return;
+    }
+    navigate("/game");
+  };
+
   return (
     <div
-      className="home-wrapper"
+      className="home-container"
       style={{ backgroundImage: `url(${background})` }}
     >
       <div className="home-overlay">
         <div className="home-card">
           <h1 className="home-title">Bazinga! Ready to challenge your neurons?</h1>
 
-          <label htmlFor="pseudo">Identify yourself, player!</label>
+          <label htmlFor="playerName">Identify yourself, player!</label>
           <input
-            id="pseudo"
+            id="playerName"
             className="home-input"
             type="text"
-            placeholder="Enter your pseudo"
             value={playerName}
             onChange={(e) => setPlayerName(e.target.value)}
+            placeholder="Enter your pseudo"
           />
 
           <label htmlFor="level">Choose your level wisely</label>
@@ -34,7 +45,7 @@ function Home({ playerName, setPlayerName, level, setLevel, onStart }) {
             <option value="hard">Hard</option>
           </select>
 
-          <button className="home-button" onClick={onStart}>
+          <button className="home-button" onClick={handleStart}>
             Engage!
           </button>
         </div>
