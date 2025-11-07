@@ -1,4 +1,4 @@
-/* === CONTAINER DU JEU === */
+/*CONTAINER GÉNÉRAL */
 .game-container {
   min-height: 100vh;
   background: url("../assets/background.jpg") center/cover no-repeat fixed;
@@ -12,51 +12,36 @@
   overflow: hidden;
 }
 
-/* === LAYER FLOUTÉ EN ARRIÈRE-PLAN === */
+/*FLUID OVERLAY (fond sombre flouté) */
 .game-container::before {
   content: "";
-  position: fixed; /* ✅ FIXÉ derrière tout */
+  position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(8px);
-  z-index: 0; /* ✅ SOUS les cartes */
+  z-index: 0;
 }
 
-/* === TITRE DU JEU === */
-.game-title {
-  position: relative;
-  z-index: 3; /* ✅ au-dessus du flou */
-  font-family: "Orbitron", sans-serif;
-  font-size: clamp(1.6rem, 2vw + 0.5rem, 2.2rem);
-  text-align: center;
-  background: linear-gradient(90deg, #ff3b3b, #16a085, #a97142);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 1.5rem;
-  animation: fadeIn 1s ease;
-}
-
-/* === GRILLE DE CARTES === */
+/*GRILLE DES CARTES */
 .cards-grid {
   position: relative;
-  z-index: 2; /* ✅ visible */
+  z-index: 2;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.8rem;
   padding: 2rem;
   width: 95%;
-  max-width: 900px;
+  max-width: 950px;
   justify-items: center;
 }
 
-/* === CARTES === */
+/*CARTES */
 .memory-card {
   perspective: 1000px;
   position: relative;
   cursor: pointer;
   transition: transform 0.3s ease;
-  z-index: 4; /* ✅ au-dessus de tout */
+  z-index: 3;
 }
 
 .memory-card:hover {
@@ -71,20 +56,17 @@
   transition: transform 0.8s ease;
   border-radius: 15px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-  background: rgba(255, 255, 255, 0.05);
 }
 
 .memory-card.flipped .card-inner {
   transform: rotateY(180deg);
 }
 
-/* === FACE AVANT / ARRIÈRE === */
+/* FACES */
 .card-front,
 .card-back {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
   border-radius: 15px;
   backface-visibility: hidden;
   overflow: hidden;
@@ -95,21 +77,36 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
   border-radius: 15px;
 }
 
-/* === Dos des cartes === */
+/*Dos : BAZINGA */
 .card-back {
   transform: rotateY(180deg);
   background: url("../assets/bazinga.jpg") center/cover no-repeat;
   border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-/* === MESSAGE DE VICTOIRE === */
+/*TITRE */
+.game-title {
+  position: relative;
+  z-index: 2;
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(1.6rem, 2vw + 0.5rem, 2.2rem);
+  text-align: center;
+  background: linear-gradient(90deg, #ff3b3b, #16a085, #a97142);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  margin-bottom: 1.5rem;
+  animation: fadeIn 1s ease;
+}
+
+/*MESSAGE VICTOIRE */
 .victory-message {
   position: relative;
-  z-index: 5; /* ✅ visible */
+  z-index: 3;
   margin-top: 1rem;
   text-align: center;
   background: rgba(255, 255, 255, 0.12);
@@ -143,7 +140,7 @@
   transform: translateY(-2px);
 }
 
-/* === ANIMATIONS === */
+/*ANIMATION */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -152,5 +149,17 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .cards-grid {
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .game-title {
+    font-size: 1.4rem;
   }
 }

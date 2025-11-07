@@ -1,4 +1,4 @@
-/* 🌌 Mise en page principale */
+/*Mise en page principale */
 .App {
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@
   transition: background 0.4s ease-in-out;
 }
 
-/* 🌐 Liens ou éléments cliquables génériques */
+/*Liens ou éléments cliquables génériques */
 a {
   color: #e74c3c;
   text-decoration: none;
@@ -22,7 +22,7 @@ a:hover {
   color: #ff6f61;
 }
 
-/* 🔳 Conteneur principal pour chaque page (Home / Game) */
+/*Conteneur principal pour chaque page (Home / Game) */
 .page-container {
   width: 100%;
   flex-grow: 1;
@@ -33,7 +33,7 @@ a:hover {
   padding: 20px;
 }
 
-/* 📱 Responsive – marges et lisibilité */
+/*Responsive – marges et lisibilité */
 @media (min-width: 768px) {
   .page-container {
     padding: 40px;

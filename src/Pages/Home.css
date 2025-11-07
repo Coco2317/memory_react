@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  perspective: 1000px;
 }
 
 /* Overlay sombre flouté */
@@ -18,32 +19,41 @@
   align-items: center;
   justify-content: center;
   z-index: 1;
-  padding: 1rem;
 }
 
-/* Carte centrale */
+/* Carte effet cube compact */
 .home-card {
   position: relative;
   z-index: 2;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 18px;
-  padding: 2.5rem 2rem;
+  padding: 2rem 4rem;
   text-align: center;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
-  width: 550px; /* format carré fixe */
-  height: 490px; /* conserve l’équilibre vertical */
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.45),
+    inset 0 0 25px rgba(255, 255, 255, 0.05);
+  width: 510px;    
+  height: 460px;      
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  transition: transform 0.6s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
 }
 
-/* Titre principal */
+.home-card:hover {
+  transform: rotateY(6deg) rotateX(4deg);
+  box-shadow:
+    0 15px 45px rgba(0, 0, 0, 0.6),
+    inset 0 0 30px rgba(255, 255, 255, 0.08);
+}
+
+/* Titre */
 .home-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.9rem;
+  margin-bottom: 1.2rem;
   background: linear-gradient(90deg, #ff3b3b, #16a085, #a97142);
   background-size: 300% 300%;
   background-clip: text;
@@ -53,14 +63,11 @@
   text-shadow: 0 0 10px rgba(255, 85, 85, 0.4),
                0 0 20px rgba(255, 85, 85, 0.2);
   transition: text-shadow 0.3s ease, transform 0.3s ease;
-  text-align: center;
-  line-height: 1.2;
 }
 
 .home-title:hover {
-  text-shadow: 0 0 25px rgba(255, 85, 85, 0.8),
-               0 0 45px rgba(255, 255, 255, 0.3);
   transform: scale(1.03);
+  text-shadow: 0 0 25px rgba(255, 85, 85, 0.8);
 }
 
 @keyframes gradientShift {
@@ -73,22 +80,22 @@
 label {
   display: block;
   color: #fff;
-  margin-top: 0.8rem;
+  margin-top: 1rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-size: 0.8rem;
+  letter-spacing: 1px;
+  font-size: 1rem;
 }
 
-/* Inputs et select */
+/* Inputs & selects */
 .home-input,
 .home-select {
   width: 100%;
   padding: 10px;
   border-radius: 10px;
   border: none;
-  margin-top: 0.4rem;
-  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
   outline: none;
   background: rgba(255, 255, 255, 0.9);
   color: #222;
@@ -98,13 +105,13 @@ label {
 .home-input:focus,
 .home-select:focus {
   box-shadow: 0 0 10px #ff3b3b;
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
 /* Bouton principal */
 .home-button {
   width: 100%;
-  margin-top: 1.2rem;
+  margin-top: 1.8rem;
   padding: 12px;
   background: linear-gradient(90deg, #e74c3c, #c0392b);
   color: #fff;
@@ -115,43 +122,25 @@ label {
   cursor: pointer;
   transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
   letter-spacing: 0.5px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.45);
 }
 
 .home-button:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.03);
   background: linear-gradient(90deg, #ff6f61, #d63a2d);
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
-/* Responsive mobile (on garde le cube mais plus souple) */
-@media (max-width: 480px) {
+/*Responsive : cube reste centré et ajusté */
+@media (max-width: 600px) {
   .home-card {
-    width: 300px;
-    height: auto;
+    width: 280px;
+    height: 370px;
     padding: 2rem 1.5rem;
+    transform: none;
   }
 
   .home-title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
-}
-
-/* Animation d’apparition de la carte */
-@keyframes fadeZoomIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  60% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* On applique l’animation à la home-card */
-.home-card {
-  animation: fadeZoomIn 0.8s ease forwards;
 }
