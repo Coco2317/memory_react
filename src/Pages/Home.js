@@ -11,7 +11,7 @@ function Home({ playerName, setPlayerName, level, setLevel }) {
       alert("Please enter your name, player!");
       return;
     }
-    // ✅ Passe le niveau choisi dans l'URL
+    //Passe le niveau choisi dans l'URL
     navigate(`/game?level=${level}`);
   };
 

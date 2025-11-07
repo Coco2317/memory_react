@@ -57,8 +57,6 @@ function MemoryGame({ playerName }) {
 
     // Mélange complet
     const shuffled = shuffleArray(duplicated);
-
-    console.log(`🧩 Niveau: ${difficulty} | Cartes générées: ${shuffled.length}`);
     return shuffled;
   };
 
