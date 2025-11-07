@@ -33,8 +33,8 @@
   box-shadow:
     0 10px 30px rgba(0, 0, 0, 0.45),
     inset 0 0 25px rgba(255, 255, 255, 0.05);
-  width: 510px;    
-  height: 460px;      
+  width: 510px;
+  height: 460px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,11 +42,22 @@
   transform-style: preserve-3d;
 }
 
+/* Cube ne tourne que si la souris est sur la carte,
+   pas sur les éléments internes (input, button...) */
 .home-card:hover {
   transform: rotateY(6deg) rotateX(4deg);
   box-shadow:
     0 15px 45px rgba(0, 0, 0, 0.6),
     inset 0 0 30px rgba(255, 255, 255, 0.08);
+}
+
+.home-card:has(input:hover),
+.home-card:has(select:hover),
+.home-card:has(button:hover),
+.home-card:has(input:focus),
+.home-card:has(select:focus),
+.home-card:has(button:focus) {
+  transform: none;
 }
 
 /* Titre */
@@ -99,13 +110,12 @@ label {
   outline: none;
   background: rgba(255, 255, 255, 0.9);
   color: #222;
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  transition: box-shadow 0.3s ease;
 }
 
 .home-input:focus,
 .home-select:focus {
   box-shadow: 0 0 10px #ff3b3b;
-  transform: scale(1.03);
 }
 
 /* Bouton principal */
@@ -126,12 +136,12 @@ label {
 }
 
 .home-button:hover {
-  transform: translateY(-3px) scale(1.03);
+  transform: translateY(-3px);
   background: linear-gradient(90deg, #ff6f61, #d63a2d);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
-/*Responsive : cube reste centré et ajusté */
+/* Responsive */
 @media (max-width: 600px) {
   .home-card {
     width: 280px;

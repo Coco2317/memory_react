@@ -3,7 +3,7 @@ import "./MemoryGame.css";
 import deckImage from "../assets/bazinga.jpg"; // dos des cartes
 import backgroundImage from "../assets/background.jpg";
 
-// 🖼️ Tes images
+//images
 import img1 from "../assets/images/img1.jpg";
 import img2 from "../assets/images/img2.jpg";
 import img3 from "../assets/images/img3.jpg";
@@ -19,7 +19,7 @@ function MemoryGame({ playerName, level }) {
   const [matchedCards, setMatchedCards] = useState([]);
   const [victory, setVictory] = useState(false);
 
-  // 🧩 Génération et mélange des cartes selon le niveau
+  //Génération et mélange des cartes selon le niveau
   useEffect(() => {
     let pairCount = 6;
     if (level === "medium") pairCount = 8;
@@ -36,7 +36,7 @@ function MemoryGame({ playerName, level }) {
     setCards(shuffledCards);
   }, [level]);
 
-  // 🃏 Gestion du clic sur une carte
+  //Gestion du clic sur une carte
   const handleCardClick = (id) => {
     const clickedCard = cards.find((c) => c.id === id);
     if (!clickedCard || clickedCard.flipped || flippedCards.length === 2) return;
@@ -48,7 +48,7 @@ function MemoryGame({ playerName, level }) {
     setFlippedCards([...flippedCards, clickedCard]);
   };
 
-  // 🔄 Vérifie les paires
+  // Vérifie les paires
   useEffect(() => {
     if (flippedCards.length === 2) {
       const [first, second] = flippedCards;
@@ -69,14 +69,14 @@ function MemoryGame({ playerName, level }) {
     }
   }, [flippedCards]);
 
-  // 🎉 Vérifie la victoire
+  //Vérifie la victoire
   useEffect(() => {
     if (matchedCards.length === cards.length / 2 && cards.length > 0) {
       setVictory(true);
     }
   }, [matchedCards, cards]);
 
-  // 🔁 Relancer une partie
+  // Relancer une partie
   const restartGame = () => {
     setVictory(false);
     setMatchedCards([]);
@@ -119,7 +119,7 @@ function MemoryGame({ playerName, level }) {
 
       {victory && (
         <div className="victory-message">
-          <h3>Bazinga! You won 🧠</h3>
+          <h3>Bazinga! You won !</h3>
           <button onClick={restartGame}>Play Again</button>
         </div>
       )}
