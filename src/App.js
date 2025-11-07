@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import Home from "./Pages/Home";
 import MemoryGame from "./Pages/MemoryGame";
@@ -12,13 +12,14 @@ function App() {
   const [level, setLevel] = useState("easy");
 
   return (
-    <Router>
+    <Router basename="/memory_react">
       <div className="App">
         <NavBar />
 
         <Routes>
+          <Route path="/" element={<Navigate to="/home" replace />} />
           <Route
-            path="/"
+            path="/home"
             element={
               <Home
                 playerName={playerName}
@@ -33,6 +34,9 @@ function App() {
             element={<MemoryGame playerName={playerName} level={level} />}
           />
           <Route path="/rules" element={<Rules />} />
+
+          {/* Sécurité : si route inconnue → Home */}
+          <Route path="*" element={<Navigate to="/home" replace />} />
         </Routes>
 
         <Footer />
