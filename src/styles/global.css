@@ -90,14 +90,3 @@ button.primary:hover {
   h1 { font-size: 2.4rem; }
 }
 
-/* Diagnostic: forcer l'affichage des cartes */
-.memory-game { display: grid !important; }
-.memory-game .card {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  transform: none !important;
-  z-index: 10 !important;
-}
-.memory-game .card img { display: block !important; width: 100% !important; height: auto !important; }

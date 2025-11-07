@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./MemoryGame.css";
-import deckImage from "../assets/bazinga.jpg"; // dos des cartes
+import deckImage from "../assets/bazinga.jpg"; // image Bazinga visible au départ
 import backgroundImage from "../assets/background.jpg";
 
-//images
+// Images à deviner
 import img1 from "../assets/images/img1.jpg";
 import img2 from "../assets/images/img2.jpg";
 import img3 from "../assets/images/img3.jpg";
@@ -19,7 +19,7 @@ function MemoryGame({ playerName, level }) {
   const [matchedCards, setMatchedCards] = useState([]);
   const [victory, setVictory] = useState(false);
 
-  //Génération et mélange des cartes selon le niveau
+  // Génération des cartes
   useEffect(() => {
     let pairCount = 6;
     if (level === "medium") pairCount = 8;
@@ -33,10 +33,11 @@ function MemoryGame({ playerName, level }) {
         image,
         flipped: false,
       }));
+
     setCards(shuffledCards);
   }, [level]);
 
-  //Gestion du clic sur une carte
+  // Gestion du clic
   const handleCardClick = (id) => {
     const clickedCard = cards.find((c) => c.id === id);
     if (!clickedCard || clickedCard.flipped || flippedCards.length === 2) return;
@@ -69,14 +70,14 @@ function MemoryGame({ playerName, level }) {
     }
   }, [flippedCards]);
 
-  //Vérifie la victoire
+  // Vérifie la victoire
   useEffect(() => {
     if (matchedCards.length === cards.length / 2 && cards.length > 0) {
       setVictory(true);
     }
   }, [matchedCards, cards]);
 
-  // Relancer une partie
+  // Relancer la partie
   const restartGame = () => {
     setVictory(false);
     setMatchedCards([]);
@@ -94,7 +95,7 @@ function MemoryGame({ playerName, level }) {
     >
       <h2 className="game-title">
         {victory
-          ? `Congrats ${playerName || "Player"}! You did it!`
+          ? `Bazinga ${playerName || "Player"}! You did it!`
           : `${playerName || "Player"}, match the cards!`}
       </h2>
 
@@ -106,11 +107,14 @@ function MemoryGame({ playerName, level }) {
             onClick={() => handleCardClick(card.id)}
           >
             <div className="card-inner">
+              {/* Recto visible au départ : Bazinga */}
               <div className="card-front">
-                <img src={card.image} alt="card front" />
+                <img src={deckImage} alt="Bazinga back" />
               </div>
+
+              {/* Verso visible quand la carte est retournée */}
               <div className="card-back">
-                <img src={deckImage} alt="card back" />
+                <img src={card.image} alt="card front" />
               </div>
             </div>
           </div>
@@ -119,7 +123,7 @@ function MemoryGame({ playerName, level }) {
 
       {victory && (
         <div className="victory-message">
-          <h3>Bazinga! You won !</h3>
+          <h3>Bazinga! You won!</h3>
           <button onClick={restartGame}>Play Again</button>
         </div>
       )}
